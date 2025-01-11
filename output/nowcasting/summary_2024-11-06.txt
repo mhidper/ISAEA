@@ -1,0 +1,19 @@
+                                      News                                     
+===============================================================================
+Model:                DynamicFactorMQ   Original sample:                2000-04
+Date:                Tue, 17 Dec 2024                                 - 2024-09
+Time:                        10:36:18   Update through:                 2024-09
+                                        # of revisions:                     586
+                                        # of new datapoints:                  2
+                          Impacts for [impacted variable = pib]                           
+==========================================================================================
+impact date estimate (prev) impact of revisions impact of news total impact estimate (new)
+------------------------------------------------------------------------------------------
+    2024-12            0.90                0.00           0.65         0.65           1.55
+                                News from updated observations:                                 
+================================================================================================
+update date                              updated variable   observed forecast (prev)        news
+------------------------------------------------------------------------------------------------
+    2024-09       Consumo aparente de cemento - Andalucía       0.02            0.00        0.02
+            Índice ventas grandes superficies - Andalucía       0.01            0.00        0.01
+================================================================================================
