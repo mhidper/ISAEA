@@ -1,22 +1,20 @@
 Listado de rutas de carpetas
 El número de serie del volumen es C874-6BAF
 C:.
+¦   .gitignore
 ¦   estructura.txt
 ¦   README.md
 ¦   requirements.txt
 ¦   
 +---code
-¦   ¦   output.xlsx
-¦   ¦   resultados_modelo.txt
-¦   ¦   
 ¦   +---notebooks
 ¦   ¦       app_v2.ipynb
 ¦   ¦       dfm.ipynb
-¦   ¦       isea 2.0.ipynb
+¦   ¦       isaea_v2.ipynb
 ¦   ¦       isea.ipynb
-¦   ¦       search - copia - 14_11_24.ipynb
+¦   ¦       search_25_11_24.ipynb
 ¦   ¦       
-¦   +---scr
+¦   +---src
 ¦           app_v2.py
 ¦           app_v2_1.py
 ¦           search_app.py
@@ -28,17 +26,17 @@ C:.
 ¦       
 +---docs
 ¦       anexo.docx
-¦       Aplicación y código de selección de mejor modelo.docx
+¦       final_version_v1.docx
 ¦       ideas.docx
-¦       versión final v1.docx
+¦       model_selection_guide.docx
 ¦       
 +---img
 ¦       logo.png
 ¦       
 +---manuals
-¦       Manual de búsqueda de modelo.docx
-¦       Manual de código de la aplicación de estimación.docx
-¦       Manual de la aplicación de estimación.docx
+¦       estimation_app_code_manual.docx
+¦       estimation_app_manual.docx
+¦       model_search_manual.docx
 ¦       
 +---output
     +---monthly
@@ -54,5 +52,7 @@ C:.
     ¦       indices_trimestrales.csv
     ¦       
     +---results
+            output.xlsx
             resultados_estimaciones.txt
+            resultados_modelo.txt
             

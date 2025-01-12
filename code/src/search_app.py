@@ -419,14 +419,22 @@ if uploaded_file is not None:
             st.write(mejor_modelo.summary())
         else:
             st.error("No se pudo encontrar un modelo válido.")
-
-        # Guardar resultados en un archivo txt
-        with open('resultados_modelo.txt', 'w') as f:
-            f.write(f"Variables mensuales seleccionadas: {mejor_comb_m}\n")
-            f.write(f"Variables trimestrales seleccionadas: {mejor_comb_q}\n")
-            f.write(f"R² máximo PIB: {max_r2_pib:.3f}\n")
-            f.write(f"Variabilidad mínima: {min_variabilidad:.3f}\n")
-            f.write(f"R² máximo PIB reciente: {max_r2_reciente:.3f}\n")
-            f.write(f"Número de factores: {mejor_num_factores}\n")
         
-        st.success("Los resultados se han guardado en 'resultados_modelo.txt'")
+        
+        # Preparar el contenido del archivo de resultados
+        resultados_contenido = f"""Variables mensuales seleccionadas: {mejor_comb_m}
+        Variables trimestrales seleccionadas: {mejor_comb_q}
+        R² máximo PIB: {max_r2_pib:.3f}
+        Variabilidad mínima: {min_variabilidad:.3f}
+        R² máximo PIB reciente: {max_r2_reciente:.3f}
+        Número de factores: {mejor_num_factores}"""
+
+        # Crear botón de descarga
+        st.download_button(
+            label="Descargar resultados",
+            data=resultados_contenido,
+            file_name="resultados_modelo.txt",
+            mime="text/plain"
+        )
+
+        st.success("Haga clic en el botón de arriba para descargar los resultados")
