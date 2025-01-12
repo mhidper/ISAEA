@@ -6,11 +6,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from statsmodels.tsa.stattools import adfuller
 import warnings
 warnings.filterwarnings("ignore")
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
 import statsmodels.api as sm
 import io
 import sys
@@ -260,8 +257,8 @@ if uploaded_files:
         st.sidebar.header("Configuración de salida")
         output_dir = st.sidebar.text_input(
             "Directorio de salida",
-            value=r"C:\Users\Usuario\Documents\Github\IECA\output",
-            help="Directorio donde se guardarán los resultados"
+            value=OUTPUT_DIR,  # Usar la constante definida al inicio
+            help="Directorio base donde se guardarán los resultados. Los distintos tipos de resultados se guardarán en subdirectorios específicos."
         )
 
         # Botón para estimar el modelo
