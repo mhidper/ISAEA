@@ -14,9 +14,29 @@ import sys
 from contextlib import redirect_stdout 
 from utils import *
 
-#Direcciones para guardar ficheros
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Configuración de la página
+st.set_page_config(
+    page_title="Procesador de Datos IECA",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Título principal
+st.title("Procesamiento de Datos IECA")
+
+# Configuración en el sidebar
+st.sidebar.header("Configuración")
+
+# Entrada para la ruta del proyecto
+default_project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = st.sidebar.text_input(
+    "Directorio raíz del proyecto",
+    value=default_project_root,
+    help="Ruta absoluta al directorio raíz del proyecto"
+)
+
+# Creación de directorios basados en la raíz del proyecto
 DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'output')
 OUTPUT_MONTHLY_DIR = os.path.join(OUTPUT_DIR, 'monthly')
@@ -57,7 +77,6 @@ def denton_method(y, x):
     
     return z
 
-
 def generar_excel_impactos(news_results, ficheros):
     """
     Genera un archivo Excel con todos los impactos de cada vintage.
@@ -69,8 +88,6 @@ def generar_excel_impactos(news_results, ficheros):
     Returns:
         BytesIO: Buffer con el archivo Excel generado
     """
-    import pandas as pd
-    import io
     
     # Creamos una lista vacía para almacenar los DataFrames de cada período
     dfs = []
@@ -138,20 +155,6 @@ def generar_excel_impactos(news_results, ficheros):
     
     return buffer, df_final
 
-# Configuración de la página
-st.set_page_config(
-    page_title="Procesador de Datos IECA",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# Título principal
-st.title("Procesamiento de Datos IECA")
-
-
-
-# Configuración en el sidebar
-st.sidebar.header("Configuración")
 
 # Opción para cargar archivos
 uploaded_files = st.sidebar.file_uploader(
@@ -677,14 +680,7 @@ if uploaded_files:
                     impacted_variable='pib',
                     comparison_type='previous'
                 )
-            # Diagnóstico simple
-            st.write("Diagnóstico de news_results:")
-            st.write(f"¿news_results existe y tiene elementos? {bool(news_results)}")
-            st.write(f"Número de elementos: {len(news_results) if news_results else 0}")
 
-            # Calcular impactos
-                
-            
             # Guardar resultados
             st.write("Guardando resultados del nowcasting...")
             
@@ -704,47 +700,51 @@ if uploaded_files:
         
             # Código para descargar los ficheros de impacto:
             if news_results:
-                st.write("### Descargar información de impactos")
-                st.write("Puede descargar un archivo Excel con todos los impactos detallados por vintage.")
+                st.write("### Descargando información de impactos")
+                dfs = []
+                for key in news_results.keys():
+                    impactos = news_results[key].details_by_impact.reset_index()
+                    temp_df = impactos[['update date', 'updated variable', 'impact']]
+                    temp_df = temp_df.rename(columns={'impact': f'impacto {key}'})
+                    dfs.append(temp_df)
+
+                # Hacemos el merge de todos los DataFrames
+                df_final = dfs[0]
+                for df in dfs[1:]:
+                    df_final = pd.merge(
+                        df_final,
+                        df,
+                        on='updated variable',
+                        how='outer',
+                        suffixes=('', f'_{len(dfs)}')
+                    )
+
+                # Renombramos las columnas para hacerlas únicas
+                df_final.columns = pd.Index([f"{col}_{i}" if df_final.columns[:i].str.contains(col).any() else col 
+                                            for i, col in enumerate(df_final.columns)])
+
+                # Ahora identificamos las columnas de update date
+                update_date_cols = [col for col in df_final.columns if 'update date' in col.lower()]
+
+                # Creamos una nueva columna combinando todas las columnas de update date
+                df_final['update date_final'] = None  # Inicializamos la nueva columna
+
+                # Iteramos por cada columna de update date
+                for col in update_date_cols:
+                    current_mask = df_final['update date_final'].isna()
+                    df_final.loc[current_mask, 'update date_final'] = df_final.loc[current_mask, col]
+
+                # Eliminamos las columnas originales de update date
+                df_final = df_final.drop(columns=update_date_cols)
+
+                # Renombramos la columna final
+                df_final = df_final.rename(columns={'update date_final': 'update date'})
                 
-                # Añadir selector de directorio para guardar el archivo
-                output_impactos_dir = st.text_input(
-                    "Directorio para guardar impactos (opcional)",
-                    value=OUTPUT_RESULTS_DIR,  # Usar directorio de resultados por defecto
-                    help="Si se especifica, se guardará una copia del archivo Excel en este directorio"
-                )
-                
-                # Botón para generar y descargar el archivo Excel
-                if st.button("Generar Excel de impactos"):
-                    # Mostrar spinner mientras se genera el archivo
-                    with st.spinner("Generando archivo Excel..."):
-                        try:
-                            # Generar el Excel
-                            excel_buffer, df_impactos = generar_excel_impactos(news_results, ficheros)
-                            
-                            # Guardar en el directorio especificado
-                            if output_impactos_dir:
-                                # Asegurar que el directorio existe
-                                os.makedirs(output_impactos_dir, exist_ok=True)
-                                
-                                # Ruta completa del archivo
-                                output_file = os.path.join(output_impactos_dir, "impactos.xlsx")
-                                
-                                # Guardar archivo en disco
-                                df_impactos.to_excel(output_file, index=False, sheet_name='Impactos')
-                                st.success(f"Archivo guardado en: {output_file}")
-                            
-                            # Ofrecer descarga
-                            st.download_button(
-                                label="Descargar Excel de impactos",
-                                data=excel_buffer,
-                                file_name="impactos.xlsx",
-                                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                            )
-                            
-                            st.success("Excel generado correctamente. Haga clic en el botón de descarga.")
-                        except Exception as e:
-                            st.error(f"Error al generar el Excel: {e}")
-        '''                        
+                # Ruta completa del archivo
+                output_file = os.path.join(nowcast_dir, "impactos.xlsx")
+                # Guardar archivo en disco
+                df_final.to_excel(output_file, index=False, sheet_name='Impactos')
+                st.success(f"Archivo guardado en: {output_file}")
+                    
             st.success(f"Resultados de nowcasting guardados en: {nowcast_dir}")
 

@@ -1,0 +1,29 @@
+                                      News                                     
+===============================================================================
+Model:                DynamicFactorMQ   Original sample:                2000-02
+Date:                Fri, 07 Mar 2025                                 - 2024-09
+Time:                        10:57:44   Update through:                 2024-12
+                                        # of revisions:                    1180
+                                        # of new datapoints:                 12
+                          Impacts for [impacted variable = pib]                           
+==========================================================================================
+impact date estimate (prev) impact of revisions impact of news total impact estimate (new)
+------------------------------------------------------------------------------------------
+    2025-03            0.37               -0.01           0.20         0.19           0.62
+                              News from updated observations:                               
+============================================================================================
+update date                          updated variable   observed forecast (prev)        news
+--------------------------------------------------------------------------------------------
+    2024-10   Consumo aparente de cemento - Andalucía      -0.03           -0.02       -0.00
+                Matriculación de turismos - Andalucía      -0.03            0.01       -0.04
+                 Total afiliados SS Total - Andalucía      15.89           10.99        4.90
+    2024-11   Consumo aparente de cemento - Andalucía       0.04           -0.00        0.04
+                Matriculación de turismos - Andalucía       0.04           -0.02        0.06
+                 Total afiliados SS Total - Andalucía      22.49            9.40       13.08
+    2024-12   Consumo aparente de cemento - Andalucía       0.02           -0.01        0.04
+                Matriculación de turismos - Andalucía      -0.01           -0.01        0.00
+                      Ocupados EPA  total - Andalucía      -0.07            0.65       -0.72
+                 Total afiliados SS Total - Andalucía      35.45            9.97       25.48
+                                                  pib       0.90            0.64        0.26
+            Índice de producción agrícola - Andalucía      -4.19           -3.27       -0.92
+============================================================================================

@@ -1,6 +1,0 @@
-Variables mensuales seleccionadas: ['Consumo aparente de cemento - Andalucía', 'Cifra negocios del sector servicios - Andalucía', 'Importaciones de bienes - Andalucía', 'Total afiliados SS Total - Andalucía', 'ICMA General sin estaciones de servicios', 'Índice general de producción industrial - Andalucía', 'Exportaciones de bienes - Andalucía']
-Variables trimestrales seleccionadas: ['pib']
-R² máximo PIB: 0.885
-Variabilidad mínima: 158.059
-R² máximo PIB reciente: 0.917
-Número de factores: 1

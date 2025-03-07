@@ -7,50 +7,50 @@ Estimación del modelo DFMQ
 
                                         Dynamic Factor Results                                       
 =====================================================================================================
-Dep. Variable:     "Consumo aparente de ceme...", and 5 more   No. Observations:                  295
-Model:                                  Dynamic Factor Model   Log Likelihood               -1206.610
-                                     + 1 factors in 1 blocks   AIC                           2455.221
-                                     + Mixed frequency (M/Q)   BIC                           2532.647
-                                       + AR(1) idiosyncratic   HQIC                          2486.224
-Date:                                       Tue, 17 Dec 2024   EM Iterations                       91
-Time:                                               10:36:09                                         
-Sample:                                           03-31-2000                                         
+Dep. Variable:     "Consumo aparente de ceme...", and 5 more   No. Observations:                  297
+Model:                                  Dynamic Factor Model   Log Likelihood               -1403.561
+                                     + 1 factors in 1 blocks   AIC                           2849.122
+                                     + Mixed frequency (M/Q)   BIC                           2926.690
+                                       + AR(1) idiosyncratic   HQIC                          2880.175
+Date:                                       Fri, 07 Mar 2025   EM Iterations                       88
+Time:                                               10:57:32                                         
+Sample:                                           01-31-2000                                         
                                                 - 09-30-2024                                         
 Covariance Type:                                Not computed                                         
                           Observation equation:                          
 =========================================================================
            Factor loadings:          0    idiosyncratic: AR(1)       var.
 -------------------------------------------------------------------------
-Consumo aparente de ceme...      -0.49                    0.40       0.64
-Índice ventas grandes su...      -0.60                    0.08       0.34
-Cifra negocios del secto...      -0.56                    0.57       0.14
-Ocupados EPA  total - An...      -0.08                   -0.81       0.05
+Consumo aparente de ceme...      -0.67                   -0.38       0.63
+Total afiliados SS Total...      -0.29                    0.76       0.36
+Matriculación de turismo...      -0.68                   -0.40       0.43
+Ocupados EPA  total - An...      -0.15                   -0.69       0.06
 Índice de producción agr...       0.01                   -0.83       0.12
-                        pib      -0.09                   -0.31       0.01
+                        pib      -0.16                   -0.75       0.03
             Transition: Factor block 0            
 ==================================================
                  L1.0       L2.0    error variance
 --------------------------------------------------
-         0       0.98      -0.60              0.78
+         0       0.45      -0.46              0.65
 ==================================================
 
 Warnings:
 [1] Covariance matrix not calculated.
 
 Información adicional:
-AIC: 2455.2207288275604
-BIC: 2532.6472113106965
+AIC: 2849.1215481842555
+BIC: 2926.689923099112
 
 Coeficientes de determinación (R^2):
 ===================================
 
 
 Tabla combinada de top variables por factor:
-                  Top ten variables explained by 0      
-                                          Variable $R^2$
-0  Cifra negocios del sector servicios - Andalucía  0.86
-1    Índice ventas grandes superficies - Andalucía  0.73
-2          Consumo aparente de cemento - Andalucía  0.29
-3                                              pib  0.05
-4                  Ocupados EPA  total - Andalucía  0.01
-5        Índice de producción agrícola - Andalucía  0.01
+            Top ten variables explained by 0      
+                                    Variable $R^2$
+0      Matriculación de turismos - Andalucía  0.63
+1    Consumo aparente de cemento - Andalucía  0.35
+2       Total afiliados SS Total - Andalucía  0.21
+3            Ocupados EPA  total - Andalucía  0.03
+4                                        pib  0.02
+5  Índice de producción agrícola - Andalucía  0.01
