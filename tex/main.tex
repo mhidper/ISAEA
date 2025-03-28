@@ -1,0 +1,225 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Metodología para el Cálculo de Series de Índices Mensuales}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este documento detalla la metodología empleada para calcular series de índices mensuales a partir de datos de frecuencia mixta (mensual y trimestral). La metodología combina un modelo de factores dinámicos con técnicas de desagregación temporal basadas en el método de Denton. El enfoque permite generar indicadores mensuales coherentes con la información trimestral, preservando los movimientos a corto plazo de los indicadores mensuales relacionados.
+\end{abstract}
+
+\section{Introducción}
+
+El análisis económico regional requiere con frecuencia disponer de indicadores de alta frecuencia (mensuales) que sean coherentes con las magnitudes macroeconómicas oficiales (trimestrales). Este documento presenta la metodología utilizada para el cálculo de series de índices mensuales a partir de información de diferente frecuencia temporal.
+
+La metodología se estructura en varias etapas secuenciales, desde el tratamiento inicial de los datos hasta la generación de los índices mensuales finales. El proceso incorpora técnicas estadísticas avanzadas que permiten combinar información de diferentes frecuencias y generar estimaciones consistentes.
+
+\section{Datos de Entrada}
+
+El punto de partida del proceso son dos conjuntos de datos:
+
+\begin{itemize}
+    \item \textbf{Series mensuales}: Indicadores económicos de frecuencia mensual que contienen información relevante sobre la evolución económica a corto plazo.
+    \item \textbf{Series trimestrales}: Variables macroeconómicas de referencia, incluido el PIB u otras variables objetivo, que proporcionan información a nivel trimestral.
+\end{itemize}
+
+\section{Preparación de los Datos}
+
+\subsection{Transformación a Series Estacionarias}
+
+El primer paso consiste en transformar las series originales en series estacionarias. Este procesamiento es fundamental para la posterior modelización econométrica.
+
+Para las series mensuales:
+\begin{equation}
+X_{t}^{m*} = f_m(X_t^m)
+\end{equation}
+
+donde $X_{t}^{m*}$ es la serie mensual transformada, $X_t^m$ es la serie mensual original, y $f_m(\cdot)$ es una función de transformación que puede incluir diferenciación, logaritmos, o tasas de variación.
+
+Para las series trimestrales:
+\begin{equation}
+X_{t}^{q*} = f_q(X_t^q)
+\end{equation}
+
+donde $X_{t}^{q*}$ es la serie trimestral transformada, $X_t^q$ es la serie trimestral original, y $f_q(\cdot)$ es la función de transformación correspondiente.
+
+\subsection{Conversión de Índices Temporales}
+
+Las series se indexan adecuadamente para su procesamiento:
+\begin{itemize}
+    \item Las series mensuales se convierten a formato de período temporal mensual.
+    \item Las series trimestrales se convierten a formato de período temporal trimestral.
+\end{itemize}
+
+\section{Estimación del Modelo de Factores Dinámicos con Frecuencias Mixtas (DFMQ)}
+
+El modelo DFMQ (Dynamic Factor Model with mixed frequencies) permite trabajar simultáneamente con datos mensuales y trimestrales. La especificación básica del modelo es:
+
+\begin{align}
+y_t^m &= \Lambda^m f_t + \varepsilon_t^m \\
+y_t^q &= \Lambda^q f_t + \varepsilon_t^q
+\end{align}
+
+donde:
+\begin{itemize}
+    \item $y_t^m$ representa el vector de series mensuales estacionarizadas.
+    \item $y_t^q$ representa el vector de series trimestrales estacionarizadas.
+    \item $f_t$ es el vector de factores no observables que siguen un proceso VAR(p).
+    \item $\Lambda^m$ y $\Lambda^q$ son las matrices de cargas factoriales para las series mensuales y trimestrales, respectivamente.
+    \item $\varepsilon_t^m$ y $\varepsilon_t^q$ son los términos de error específicos.
+\end{itemize}
+
+La dinámica de los factores sigue un proceso autorregresivo:
+\begin{equation}
+f_t = \Phi_1 f_{t-1} + \Phi_2 f_{t-2} + \ldots + \Phi_p f_{t-p} + \eta_t
+\end{equation}
+
+donde $\Phi_1, \Phi_2, \ldots, \Phi_p$ son matrices de coeficientes y $\eta_t$ es un término de error.
+
+\subsection{Estimación del Modelo}
+
+El modelo se estima mediante máxima verosimilitud, utilizando el filtro de Kalman para manejar las frecuencias mixtas y los valores faltantes. Los parámetros estimados incluyen:
+\begin{itemize}
+    \item Las matrices de cargas factoriales ($\Lambda^m, \Lambda^q$).
+    \item Los coeficientes del proceso VAR de los factores ($\Phi_1, \Phi_2, \ldots, \Phi_p$).
+    \item Las matrices de varianzas-covarianzas de los términos de error.
+\end{itemize}
+
+\section{Generación de Predicciones}
+
+Una vez estimado el modelo, se procede a generar predicciones para las variables incluidas. Para cada período $t$, se obtienen predicciones tanto para las series mensuales como para las trimestrales:
+
+\begin{align}
+\hat{y}_t^m &= \hat{\Lambda}^m \hat{f}_t \\
+\hat{y}_t^q &= \hat{\Lambda}^q \hat{f}_t
+\end{align}
+
+donde $\hat{y}_t^m$ y $\hat{y}_t^q$ son las predicciones para las series mensuales y trimestrales, respectivamente, y $\hat{f}_t$ es la estimación de los factores no observables.
+
+\section{Cálculo de Índices}
+
+\subsection{Índices Trimestrales}
+
+A partir de las predicciones trimestrales, que representan tasas de crecimiento, se construye una serie de índices con base 100 en el período inicial:
+
+\begin{equation}
+I_t^q = 
+\begin{cases}
+    100, & \text{si } t = t_0 \\
+    I_{t-1}^q \cdot \left(1 + \frac{\hat{y}_t^q}{100}\right), & \text{si } t > t_0
+\end{cases}
+\end{equation}
+
+donde $I_t^q$ es el índice trimestral en el período $t$, y $t_0$ es el período base.
+
+\subsection{Preparación de Índices Mensuales Preliminares}
+
+Para la mensualización de los índices, se siguen varios pasos:
+
+\subsubsection{Media Móvil de Predicciones Mensuales}
+
+Se calcula una media móvil centrada de las predicciones mensuales con una ventana de tres meses:
+
+\begin{equation}
+\bar{y}_t^m = \frac{1}{3} \sum_{j=-1}^{1} \hat{y}_{t+j}^m
+\end{equation}
+
+\subsubsection{Transformación a Tasas de Crecimiento Mensual}
+
+Las medias móviles se transforman en tasas de crecimiento mensual equivalentes:
+
+\begin{equation}
+g_t^m = 100 \cdot \left[\left(1 + \frac{\bar{y}_t^m}{100}\right)^{1/3} - 1\right]
+\end{equation}
+
+\subsubsection{Construcción de Índices Mensuales Preliminares}
+
+A partir de las tasas de crecimiento mensual, se construye una serie de índices mensuales preliminares:
+
+\begin{equation}
+\tilde{I}_t^m = 
+\begin{cases}
+    100, & \text{si } t = t_0 \\
+    \tilde{I}_{t-1}^m \cdot \left(1 + \frac{g_t^m}{100}\right), & \text{si } t > t_0
+\end{cases}
+\end{equation}
+
+\section{Método de Denton para Desagregación Temporal}
+
+El último paso del proceso consiste en aplicar el método de Denton para asegurar la coherencia entre los índices mensuales y trimestrales. Este método permite obtener una serie mensual cuyos valores trimestrales agregados coinciden exactamente con los valores trimestrales observados, preservando al mismo tiempo el patrón de movimiento de la serie mensual preliminar.
+
+\subsection{Formulación del Problema}
+
+El método de Denton minimiza la siguiente función objetivo:
+
+\begin{equation}
+\min_{I^m} \sum_{t=2}^{T} \left(\frac{I_t^m}{\tilde{I}_t^m} - \frac{I_{t-1}^m}{\tilde{I}_{t-1}^m}\right)^2
+\end{equation}
+
+sujeto a la restricción:
+
+\begin{equation}
+\sum_{j=0}^{2} I_{3t+j}^m = 3 \cdot I_t^q \quad \forall t
+\end{equation}
+
+donde $I_t^m$ son los índices mensuales finales, $\tilde{I}_t^m$ son los índices mensuales preliminares, y $I_t^q$ son los índices trimestrales.
+
+\subsection{Solución Algebraica}
+
+La solución al problema se obtiene mediante álgebra matricial. Si definimos las matrices:
+\begin{itemize}
+    \item $C$: matriz de agregación que convierte valores mensuales en trimestrales.
+    \item $D$: matriz de primeras diferencias.
+\end{itemize}
+
+La solución viene dada por:
+
+\begin{equation}
+I^m = \left(C^T C + D^T D\right)^{-1} \left(C^T I^q + D^T D \tilde{I}^m\right)
+\end{equation}
+
+donde $I^m$ es el vector de índices mensuales finales, $I^q$ es el vector de índices trimestrales, y $\tilde{I}^m$ es el vector de índices mensuales preliminares.
+
+\section{Resultados Finales}
+
+El proceso descrito genera una serie de índices mensuales con las siguientes propiedades:
+\begin{itemize}
+    \item Son coherentes con los índices trimestrales: la media de cada tres meses consecutivos coincide con el índice trimestral correspondiente.
+    \item Preservan el patrón de movimiento a corto plazo de los indicadores mensuales originales.
+    \item Incorporan toda la información disponible a nivel mensual y trimestral.
+\end{itemize}
+
+\section{Consideraciones Adicionales}
+
+\subsection{Tratamiento de Outliers}
+
+En casos específicos, como los efectos de la COVID-19, se pueden incorporar variables dummy en el modelo DFMQ para capturar efectos extraordinarios que podrían distorsionar las estimaciones.
+
+\subsection{Actualización con Nuevos Datos}
+
+El proceso permite la actualización del sistema con nuevos datos (vintages), lo que facilita la incorporación de nueva información a medida que está disponible y el análisis de las revisiones de los índices.
+
+\subsection{Análisis de Nowcasting}
+
+La metodología se complementa con técnicas de nowcasting que permiten evaluar el impacto de nuevos datos en las estimaciones y predicciones, proporcionando una herramienta valiosa para el seguimiento en tiempo real de la actividad económica.
+
+\section{Conclusiones}
+
+La metodología presentada proporciona un marco riguroso para la construcción de índices mensuales coherentes con información trimestral de referencia. El enfoque combina técnicas estadísticas avanzadas (modelos de factores dinámicos) con métodos de desagregación temporal (Denton), permitiendo obtener indicadores de alta frecuencia con propiedades estadísticas deseables y utilidad para el análisis económico coyuntural.
+
+\end{document}
