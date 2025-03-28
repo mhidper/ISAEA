@@ -476,23 +476,18 @@ if uploaded_file is not None:
             # Obtener las predicciones del modelo
             predicciones = mejor_modelo.predict()
             
-            # Definir el rango de fechas (desde enero 2021)
-            fecha_inicio = pd.Period('2021Q1')
-            
+        
             # Crear un gráfico de las predicciones del PIB vs valores originales
             fig, ax = plt.subplots(figsize=(12, 6))
             
             # Filtrar y graficar predicciones desde 2021
-            predicciones_filtradas = predicciones['pib'][fecha_inicio:]
+            predicciones_filtradas = predicciones['pib']['2022Q1':].resample('Q').mean()
+            pib_original_filtrado = endog_q['pib']['2022Q1':]
             predicciones_filtradas.plot(ax=ax, label='Predicción del modelo', color='blue', linewidth=2)
-            
-            # Obtener y graficar valores originales del PIB
-            pib_original = endog_q['pib']
-            pib_original_filtrado = pib_original[pib_original.index >= fecha_inicio]
             pib_original_filtrado.plot(ax=ax, label='PIB observado', color='red', linestyle='--', linewidth=2)
             
             # Mejorar la visualización
-            ax.set_title('Predicciones vs Valores Originales del PIB (desde 2021)')
+            ax.set_title('Predicciones vs Valores Originales mensuales del PIB (desde 2022)')
             ax.set_xlabel('Fecha')
             ax.set_ylabel('PIB')
             ax.legend()
