@@ -745,6 +745,6 @@ if uploaded_files:
                             st.success("Excel generado correctamente. Haga clic en el botón de descarga.")
                         except Exception as e:
                             st.error(f"Error al generar el Excel: {e}")
-        '''                        
+                            
             st.success(f"Resultados de nowcasting guardados en: {nowcast_dir}")
 
