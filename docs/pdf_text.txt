@@ -1,0 +1,123 @@
+REVISIÓN MARZO 2026. CUESTIONES A PLANTEAR DE HERRAMIENTA 
+DE NOWCASTING 
+ 
+ 
+Tras la revisión que hemos realizado de la nueva versión de Nowcasting, app_v3_1  trasladamos las 
+siguientes cuestiones que quedarían pendientes: 
+ 
+1.- Cuando eliminamos una variable o intercambiamos variables en la selección de estas, o 
+simplemente eliminamos un fichero para insertar otro, siempre nos aparece el siguiente error: 
+ 
+ 
+ 
+2.- Tanto en la tabla de “Descargas individuales de nowcasting” y “Generando archivo 
+consolidado de impactos”, nos aparecen en la columna update y fecha , el código del periodo y no 
+la fecha, cosa que dijimos de modificar y que apareciera la fecha concreta. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.- El gráfico sigue fallando, aunque si muestra el impacto total entre estimación inicial y final, 
+pensamos que el gráfico debería mostrar en el punto inicial su estimación previa y en el punto final 
+su nueva estimación. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+En este 
+caso el 
+punto de partida debería ser 0,34 y la estimación nueva sería 0,45 con un impacto total de 0,12. Se 
+muestra el impacto total pero no toma los valores de las estimaciones previa y nueva. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Si hacemos un cambio grande en el dato del indice desasestacionalizado tanto de octubre de la Cifra 
+de negocios y el ICMA dentro del fichero “Envío_21_02_2026” el fichero que nos proporciona de 
+archivos consolidados de impactos sigue siendo igual. Esto nos sorprende, porque pensamos que 
+debería cambiar: 
+ 
+La prueba la hemos hecho cambiado l dato del ICMA en el mes de octubre, pasando de 117,875301 
+a 180 y en el caso de la Cifra de Negocio hemos cambiado el mes de octubre de 162.9046 a 325. 
+ 
+ 
+ 
+ 
+ 
+ 

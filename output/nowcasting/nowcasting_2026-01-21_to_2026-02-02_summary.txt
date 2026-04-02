@@ -1,0 +1,18 @@
+                                      News                                     
+===============================================================================
+Model:                DynamicFactorMQ   Original sample:                2000-03
+Date:                Thu, 02 Apr 2026                                 - 2025-12
+Time:                        09:50:01   Update through:                 2025-12
+                                        # of revisions:                     205
+                                        # of new datapoints:                  1
+                          Impacts for [impacted variable = pib]                           
+==========================================================================================
+impact date estimate (prev) impact of revisions impact of news total impact estimate (new)
+------------------------------------------------------------------------------------------
+    2025-12            0.84                0.00           0.03         0.03           0.88
+                         News from updated observations:                          
+==================================================================================
+update date                updated variable   observed forecast (prev)        news
+----------------------------------------------------------------------------------
+    2025-12 Ocupados EPA  total - Andalucía       0.87            0.75        0.12
+==================================================================================

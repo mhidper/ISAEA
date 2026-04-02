@@ -11,27 +11,31 @@ def make_all_stationary_m(df):
     transformed_df = df.copy()
     transformed_df = transformed_df.apply(np.log)
     
-    diff_counts = {}  # Diccionario para almacenar el número de diferenciaciones por columna
+    diff_counts = {}
+    max_diffs = 0  # ← Rastrear máximo de diferenciaciones
 
     for column in transformed_df.columns:
         series = transformed_df[column]
-        
-        # Imputa valores faltantes con la media de la serie
         series = series.dropna()
         
-        p_value = 1  # Inicializa el p-valor con un valor alto para entrar al bucle
-        diff_count = 0  # Contador de veces que se ha diferenciado la serie
+        p_value = 1
+        diff_count = 0
 
-        while p_value > 0.05:  # Hasta que la serie sea estacionaria (p-valor menor que 0.05)
+        while p_value > 0.05:
             result = adfuller(series)
-            p_value = result[1]  # Obtiene el p-valor del test ADF
+            p_value = result[1]
             
-            if p_value > 0.05:  # Si la serie no es estacionaria
-                series = series.diff(1).dropna()  # Aplica una diferenciación
-                diff_count += 1  # Incrementa el contador de diferenciaciones
+            if p_value > 0.05:
+                series = series.diff(1).dropna()
+                diff_count += 1
         
-        transformed_df[column] = series  # Actualiza la columna en el DataFrame transformado
-        diff_counts[column] = diff_count  # Almacena el número de diferenciaciones en el diccionario
+        transformed_df[column] = series
+        diff_counts[column] = diff_count
+        max_diffs = max(max_diffs, diff_count)  # ← Actualizar máximo
+    
+    # ✅ SOLUCIÓN: Recortar solo las primeras filas (por diferenciación)
+    # No tocar las últimas (pueden ser datos pendientes para nowcasting)
+    transformed_df = transformed_df.iloc[max_diffs:]
     
     return transformed_df, diff_counts
 
