@@ -1,64 +1,36 @@
 Resultados de las estimaciones
 =============================
 
-EstimaciÛn del modelo DFMQ
-
-=============================
-
                                         Dynamic Factor Results                                       
 =====================================================================================================
-Dep. Variable:     "Consumo aparente de ceme...", and 9 more   No. Observations:                  310
-Model:                                  Dynamic Factor Model   Log Likelihood               -2023.437
-                                     + 1 factors in 1 blocks   AIC                           4112.873
-                                     + Mixed frequency (M/Q)   BIC                           4236.180
-                                       + AR(1) idiosyncratic   HQIC                          4162.166
-Date:                                       Thu, 02 Apr 2026   EM Iterations                      131
-Time:                                               09:49:47                                         
+Dep. Variable:     "Exportaciones de bienes ...", and 5 more   No. Observations:                  316
+Model:                                  Dynamic Factor Model   Log Likelihood               -1289.208
+                                     + 1 factors in 1 blocks   AIC                           2620.415
+                                     + Mixed frequency (M/Q)   BIC                           2699.286
+                                       + AR(1) idiosyncratic   HQIC                          2651.923
+Date:                                       Fri, 26 Jun 2026   EM Iterations                      141
+Time:                                               14:27:20                                         
 Sample:                                           03-31-2000                                         
-                                                - 12-31-2025                                         
+                                                - 06-30-2026                                         
 Covariance Type:                                Not computed                                         
                           Observation equation:                          
 =========================================================================
            Factor loadings:          0    idiosyncratic: AR(1)       var.
 -------------------------------------------------------------------------
-Consumo aparente de ceme...      -0.67                   -0.29       0.70
-Total afiliados SS Total...      -0.28                    0.69       0.45
-MatriculaciÛn de turismo...      -0.67                   -0.41       0.38
-Ocupados EPA  total - An...      -0.15                   -0.74       0.06
-Õndice de producciÛn agr...       0.00                   -0.76       0.12
-                        pib      -0.17                   -0.57       0.02
-                    D2020Q1       0.03                   -0.80       0.12
-                    D2020Q2       0.10                    0.15       0.02
-                    D2020Q3      -0.09                    0.35       0.02
-                    D2020Q4      -0.00                   -0.73       0.13
+Exportaciones de bienes ...      -0.72                   -0.36       0.87
+√çndice general de produc...      -0.71                   -0.34       0.66
+√çndice de producci√≥n agr...       0.01                   -0.75       0.13
+Horas totales empleo pri...      -0.18                   -0.92       0.01
+Ocupados EPA  total - An...      -0.15                   -0.68       0.06
+                        pib      -0.18                   -0.86       0.02
             Transition: Factor block 0            
 ==================================================
                  L1.0       L2.0    error variance
 --------------------------------------------------
-         0       0.43      -0.44              0.84
+         0       0.75      -0.50              0.32
 ==================================================
 
 Warnings:
 [1] Covariance matrix not calculated.
-
-InformaciÛn adicional:
-AIC: 4112.873497038661
-BIC: 4236.180382855475
-
-Coeficientes de determinaciÛn (R^2):
-===================================
-
-
-Tabla combinada de top variables por factor:
-            Top ten variables explained by 0      
-                                    Variable $R^2$
-0      MatriculaciÛn de turismos - AndalucÌa  0.66
-1                                    D2020Q1  0.62
-2    Consumo aparente de cemento - AndalucÌa  0.33
-3                                    D2020Q2  0.28
-4       Total afiliados SS Total - AndalucÌa  0.17
-5            Ocupados EPA  total - AndalucÌa  0.02
-6                                        pib  0.02
-7  Õndice de producciÛn agrÌcola - AndalucÌa  0.00
-8                                    D2020Q4  0.00
-9                                    D2020Q3  0.00
+AIC: 2620.4151410793875
+BIC: 2699.2857275647125
